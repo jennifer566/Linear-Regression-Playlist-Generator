@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Generator</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1> Playlist Generator</h1>
+        <form method="post" action="/">
+            <br>
+            <label for="danceability">Danceability:</label>
+            <input  type="range" name="danceability" min="0" max="1" step="0.01" required>
+            <span id="danceability-value" style="margin-left: auto; font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">0.5</span>
+
+            <label for="energy">Energy:</label>
+            <input type="range" name="energy" min="0" max="1" step="0.01" required>
+            <span id="energy-value" style="margin-left: auto;">0.5</span>
+
+           
+
+            <label for="valence">Valence:</label>
+            <input type="range" name="valence" min="0" max="1" step="0.01" required>
+            <span id="valence-value" style="margin-left: auto;">0.5</span>
+
+
+            <button type="submit">Generate Playlist</button>
+        </form>
+        <br>
+        {% if predicted_popularity %}
+            <p style="color: white;">Predicted Playlist Popularity: {{ predicted_popularity }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Add an event listener to update the range value display
+        const rangeInputs = document.querySelectorAll('input[type="range"]');
+        rangeInputs.forEach(input => {
+            const valueSpan = document.getElementById(`${input.name}-value`);
+            valueSpan.textContent = input.value;
+
+            input.addEventListener('input', () => {
+                valueSpan.textContent = input.value;
+            });
+        });
+    </script>
+</body>
+
+</html>
